@@ -1,0 +1,17 @@
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.BusinessLayer.deps.json
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.BusinessLayer.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\ref\NewsBlog.BusinessLayer.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.BusinessLayer.pdb
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.Domain.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.Domain.pdb
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.BusinessLayer.csprojAssemblyReference.cache
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.BusinessLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.BusinessLayer.AssemblyInfoInputs.cache
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.BusinessLayer.AssemblyInfo.cs
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.BusinessLayer.csproj.CoreCompileInputs.cache
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.BusinessLayer.csproj.CopyComplete
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.BusinessLayer.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\ref\NewsBlog.BusinessLayer.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.BusinessLayer.pdb
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.EfDataAccess.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.EfDataAccess.pdb

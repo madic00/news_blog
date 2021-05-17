@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewsBlog.BusinessLayer\NewsBlog.BusinessLayer.csproj" />
+    <ProjectReference Include="..\NewsBlog.Domain\NewsBlog.Domain.csproj" />
+    <ProjectReference Include="..\NewsBlog.EfDataAccess\NewsBlog.EfDataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.0.4" />
+  </ItemGroup>
+
+</Project>

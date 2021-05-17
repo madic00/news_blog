@@ -1,0 +1,12 @@
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\bin\Debug\net5.0\NewsBlog.Domain.deps.json
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\bin\Debug\net5.0\NewsBlog.Domain.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\bin\Debug\net5.0\ref\NewsBlog.Domain.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\bin\Debug\net5.0\NewsBlog.Domain.pdb
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\obj\Debug\net5.0\NewsBlog.Domain.csprojAssemblyReference.cache
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\obj\Debug\net5.0\NewsBlog.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\obj\Debug\net5.0\NewsBlog.Domain.AssemblyInfoInputs.cache
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\obj\Debug\net5.0\NewsBlog.Domain.AssemblyInfo.cs
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\obj\Debug\net5.0\NewsBlog.Domain.csproj.CoreCompileInputs.cache
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\obj\Debug\net5.0\NewsBlog.Domain.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\obj\Debug\net5.0\ref\NewsBlog.Domain.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.Domain\obj\Debug\net5.0\NewsBlog.Domain.pdb
