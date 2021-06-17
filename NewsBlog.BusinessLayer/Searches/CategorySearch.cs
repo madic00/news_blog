@@ -1,4 +1,5 @@
-﻿using Doublel.DynamicQueryBuilder.Attributes;
+﻿using Doublel.DynamicQueryBuilder;
+using Doublel.DynamicQueryBuilder.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace NewsBlog.Application.Searches
 {
     public class CategorySearch : PageSearch
     {
-        [QueryProperty]
+        [QueryProperty(ComparisonOperator.Contains, "Name")]
         public string Name { get; set; }
 
     }
