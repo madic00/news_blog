@@ -16,7 +16,7 @@ namespace NewsBlog.EfDataAccess.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.5")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("NewsBlog.Domain.Category", b =>
@@ -26,70 +26,26 @@ namespace NewsBlog.EfDataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryName")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryName = "Sport",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryName = "Tech",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryName = "News",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryName = "Business",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryName = "Entertainment",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryName = "Health",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true
-                        });
                 });
 
             modelBuilder.Entity("NewsBlog.Domain.Comment", b =>
@@ -104,6 +60,9 @@ namespace NewsBlog.EfDataAccess.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
 
                     b.Property<int>("PostId")
                         .HasColumnType("int");
@@ -121,45 +80,13 @@ namespace NewsBlog.EfDataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentId");
+
                     b.HasIndex("PostId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("NewsBlog.Domain.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Alt")
-                        .IsRequired()
-                        .HasColumnType("varchar");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Source")
-                        .IsRequired()
-                        .HasColumnType("varchar");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("NewsBlog.Domain.Post", b =>
@@ -184,7 +111,8 @@ namespace NewsBlog.EfDataAccess.Migrations
 
                     b.Property<string>("MainImg")
                         .IsRequired()
-                        .HasColumnType("varchar");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -204,1108 +132,6 @@ namespace NewsBlog.EfDataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 2,
-                            Content = "Velit nam et sapiente occaecati et dolorum voluptate et.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Amet quo et laborum.",
-                            UserId = 22
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 3,
-                            Content = "similique",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Necessitatibus iure commodi rerum mollitia fugit odit vitae velit.",
-                            UserId = 16
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 3,
-                            Content = "placeat",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Tempore molestiae explicabo molestiae.",
-                            UserId = 11
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 6,
-                            Content = "Non aut unde amet maxime numquam accusantium nihil.\nImpedit delectus rerum est quasi id nesciunt velit neque.\nInventore asperiores est accusamus.\nUnde accusamus ipsum.\nQuia modi aspernatur qui assumenda repudiandae sit ullam sed.\nVoluptatum ex aut.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Fugit et libero nostrum.",
-                            UserId = 9
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 2,
-                            Content = "dolorem",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Consequuntur iure praesentium odio.",
-                            UserId = 34
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 3,
-                            Content = "Officiis ipsa modi eius in est ratione officiis. Necessitatibus nemo fuga in nobis officiis rerum maxime. Atque harum aut est alias exercitationem porro. Ut quas a modi reiciendis commodi vitae quis id enim.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Quos aliquam consequuntur ipsam consequatur eligendi quia.",
-                            UserId = 35
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 1,
-                            Content = "Eos rerum est blanditiis qui non.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Doloremque omnis omnis ipsam error ducimus minima sed et at.",
-                            UserId = 8
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 6,
-                            Content = "Rem voluptates earum perspiciatis accusantium vitae error inventore quo quae.\nIpsam perspiciatis ad est sunt pariatur aut non.\nExplicabo ad consequatur.\nQuaerat nulla blanditiis ad sapiente non itaque eos tempore et.\nQuis voluptatem quia dolorem commodi debitis aut incidunt natus placeat.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Eaque molestiae et laborum.",
-                            UserId = 40
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CategoryId = 5,
-                            Content = "Ut aperiam veniam sit.\nQuis explicabo amet aut similique rerum necessitatibus.\nEx eum cupiditate veniam dolorem.\nNostrum quae consequatur nesciunt.\nVero officia a consequuntur debitis iusto accusantium aspernatur fugiat.\nEum tempora ipsa facilis id officia quo quae qui.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Maiores accusamus ipsam quo et et aut.",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CategoryId = 5,
-                            Content = "magni",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Et explicabo similique sapiente.",
-                            UserId = 26
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CategoryId = 5,
-                            Content = "Voluptas eaque sit delectus enim tempore ut.\nInventore occaecati cupiditate animi atque rerum molestiae.\nIn repellat ex voluptatibus necessitatibus omnis sit.\nSed maxime eius beatae porro corporis et aspernatur aliquid excepturi.\nCumque quaerat maxime minus dolor.\nQuia eaque ab iusto voluptate facilis in occaecati.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Rerum eum non voluptatem.",
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CategoryId = 6,
-                            Content = "Dolorem facere necessitatibus molestiae magnam ut.\nQui nisi fugiat voluptatem sunt.\nSimilique est delectus natus quo.\nFacilis natus recusandae.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Hic voluptatem vel saepe rerum error sit sit pariatur.",
-                            UserId = 12
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CategoryId = 6,
-                            Content = "Ipsum voluptas quia dolores quis neque aut sequi cum magnam.\nIusto sed rerum aut omnis quasi quo illo est.\nLaudantium consequatur ut saepe.\nVelit impedit autem explicabo similique quae.\nEarum explicabo dolore dolorem quasi iusto.\nOmnis iste nihil reprehenderit assumenda dolores ut deserunt repudiandae.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Deleniti porro blanditiis officiis facere.",
-                            UserId = 31
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CategoryId = 1,
-                            Content = "Culpa soluta maxime sit dolor. Natus eum repellat in magnam eius culpa eaque esse. Qui neque illum quibusdam. Nostrum et quam ut sit iure est saepe totam unde.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Et sint et sequi possimus impedit occaecati enim id necessitatibus.",
-                            UserId = 20
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CategoryId = 5,
-                            Content = "Inventore quibusdam ex occaecati aut sint.\nItaque quia libero aut eos non.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Aliquam adipisci voluptas.",
-                            UserId = 14
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CategoryId = 2,
-                            Content = "Quos provident at sed sapiente iure adipisci impedit fugit.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Recusandae quas voluptatum quis doloremque voluptas facere asperiores.",
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CategoryId = 2,
-                            Content = "Qui fugit facere porro iste.\nEligendi qui veritatis reprehenderit occaecati doloremque enim distinctio.\nAut repellendus rem qui.\nNostrum dolorum repudiandae.\nAut quibusdam saepe.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Aut voluptatem dignissimos quis corrupti eos ipsa sit consequatur quisquam.",
-                            UserId = 38
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CategoryId = 3,
-                            Content = "Dicta non libero.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Quam maiores nobis non minus.",
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 19,
-                            CategoryId = 5,
-                            Content = "Ea eius dolore tempora id delectus velit sed eligendi.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Doloremque nihil consectetur ipsa et et laboriosam eius.",
-                            UserId = 32
-                        },
-                        new
-                        {
-                            Id = 20,
-                            CategoryId = 1,
-                            Content = "Et sunt omnis sed eum consequatur animi aut culpa quis.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Possimus repellendus ea nemo architecto nihil nemo.",
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 21,
-                            CategoryId = 1,
-                            Content = "voluptas",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Omnis culpa quam nihil.",
-                            UserId = 11
-                        },
-                        new
-                        {
-                            Id = 22,
-                            CategoryId = 2,
-                            Content = "rerum",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Maiores asperiores nemo fugiat rerum occaecati.",
-                            UserId = 7
-                        },
-                        new
-                        {
-                            Id = 23,
-                            CategoryId = 5,
-                            Content = "Nulla est mollitia aut.\nVero eos eos et sint omnis.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Sit aut delectus et.",
-                            UserId = 11
-                        },
-                        new
-                        {
-                            Id = 24,
-                            CategoryId = 6,
-                            Content = "Veritatis rerum consequuntur qui. Et commodi occaecati porro. Sunt est totam nam voluptatem.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Quia consequatur voluptatibus et nemo ut voluptatem ullam est.",
-                            UserId = 18
-                        },
-                        new
-                        {
-                            Id = 25,
-                            CategoryId = 1,
-                            Content = "Officiis aperiam rerum expedita et exercitationem maxime provident. Similique ex ipsa. Minus omnis facilis alias omnis aperiam.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Vero ducimus numquam ut.",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 26,
-                            CategoryId = 2,
-                            Content = "Dignissimos et culpa labore.\nVero ut magnam unde culpa.\nImpedit tempora aut eum cupiditate beatae fugit dolorum unde reprehenderit.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Vel quibusdam suscipit omnis.",
-                            UserId = 20
-                        },
-                        new
-                        {
-                            Id = 27,
-                            CategoryId = 4,
-                            Content = "Et aut voluptate aut corporis quis totam sit. Sit labore atque. Veritatis quae voluptas.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Et non esse recusandae quasi.",
-                            UserId = 8
-                        },
-                        new
-                        {
-                            Id = 28,
-                            CategoryId = 5,
-                            Content = "Qui nisi repellendus suscipit quia.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Nesciunt voluptatibus enim aliquam distinctio voluptatem cumque et eos.",
-                            UserId = 21
-                        },
-                        new
-                        {
-                            Id = 29,
-                            CategoryId = 2,
-                            Content = "Voluptates ullam id dolorem sunt.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Quo rerum corporis consequuntur tempore ut inventore placeat eaque.",
-                            UserId = 12
-                        },
-                        new
-                        {
-                            Id = 30,
-                            CategoryId = 4,
-                            Content = "doloribus",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Voluptates repudiandae aut odio.",
-                            UserId = 12
-                        },
-                        new
-                        {
-                            Id = 31,
-                            CategoryId = 6,
-                            Content = "Aliquid aspernatur ut soluta.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Ullam dolorem pariatur explicabo molestias minus in et.",
-                            UserId = 37
-                        },
-                        new
-                        {
-                            Id = 32,
-                            CategoryId = 2,
-                            Content = "Sed dolore eius officiis quam consequatur voluptate molestias. Mollitia eum molestias eligendi sapiente labore corporis eaque ea animi. Iure et aperiam ducimus. Rem deserunt recusandae culpa in ipsam. Voluptas ratione saepe voluptatem sint cupiditate. Earum maxime voluptas qui earum at.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Dignissimos numquam molestias fuga officia reprehenderit.",
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 33,
-                            CategoryId = 1,
-                            Content = "assumenda",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Placeat magnam enim quia unde doloribus exercitationem est enim dolores.",
-                            UserId = 35
-                        },
-                        new
-                        {
-                            Id = 34,
-                            CategoryId = 3,
-                            Content = "Perspiciatis quasi reiciendis temporibus.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Hic omnis voluptatum non iste minima.",
-                            UserId = 10
-                        },
-                        new
-                        {
-                            Id = 35,
-                            CategoryId = 4,
-                            Content = "Laboriosam nam quaerat at voluptas aut quidem fugiat.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Et expedita in unde molestiae explicabo deserunt.",
-                            UserId = 9
-                        },
-                        new
-                        {
-                            Id = 36,
-                            CategoryId = 5,
-                            Content = "Sed sit nostrum provident aperiam et quidem nostrum voluptas.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Ab maxime architecto provident dolorem enim voluptates qui distinctio.",
-                            UserId = 17
-                        },
-                        new
-                        {
-                            Id = 37,
-                            CategoryId = 1,
-                            Content = "Tempore nihil tenetur enim ut quo enim non ipsa.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Sed dolor aut tempora.",
-                            UserId = 7
-                        },
-                        new
-                        {
-                            Id = 38,
-                            CategoryId = 2,
-                            Content = "quidem",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Iure quos magni quidem nisi et.",
-                            UserId = 39
-                        },
-                        new
-                        {
-                            Id = 39,
-                            CategoryId = 1,
-                            Content = "unde",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Nesciunt quis est illum quaerat voluptatum ut.",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 40,
-                            CategoryId = 2,
-                            Content = "Commodi quos deserunt soluta qui nesciunt consequuntur et est.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Similique et nemo qui blanditiis ut debitis impedit quia ut.",
-                            UserId = 16
-                        },
-                        new
-                        {
-                            Id = 41,
-                            CategoryId = 1,
-                            Content = "Necessitatibus eligendi fugiat consectetur rerum voluptas repellat voluptatum vel vitae.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Quis impedit minima.",
-                            UserId = 24
-                        },
-                        new
-                        {
-                            Id = 42,
-                            CategoryId = 3,
-                            Content = "modi",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Cum in laudantium quisquam ipsa quis voluptatem quis aut.",
-                            UserId = 35
-                        },
-                        new
-                        {
-                            Id = 43,
-                            CategoryId = 2,
-                            Content = "Quis doloribus perferendis.\nArchitecto pariatur aut commodi sit.\nAnimi vel atque est.\nDelectus aut repellat nobis doloribus et.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Suscipit consectetur earum soluta et omnis eligendi.",
-                            UserId = 11
-                        },
-                        new
-                        {
-                            Id = 44,
-                            CategoryId = 2,
-                            Content = "Distinctio fugit rem impedit facere.\nQuia sit facilis numquam aut.\nTenetur nihil numquam ad minima culpa optio voluptates praesentium qui.\nVoluptas eveniet temporibus architecto voluptatem sit est.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Nam fugit et alias cumque dicta possimus et.",
-                            UserId = 10
-                        },
-                        new
-                        {
-                            Id = 45,
-                            CategoryId = 5,
-                            Content = "Quaerat eius cumque excepturi aut temporibus quas et dolores unde. Corrupti consequatur deleniti laboriosam maiores. Pariatur architecto perspiciatis ratione consequatur delectus modi. Dolorem aperiam sed. Accusamus aut aut animi ut sit.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Provident aut quasi.",
-                            UserId = 30
-                        },
-                        new
-                        {
-                            Id = 46,
-                            CategoryId = 1,
-                            Content = "Dolor distinctio quia magni.\nPerspiciatis provident modi placeat et repellendus ducimus magnam voluptatum.\nRerum possimus eum quia ut nam.\nRerum laudantium praesentium reiciendis doloribus sit.\nVeniam voluptatum rem quae.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Repellat qui expedita autem et.",
-                            UserId = 29
-                        },
-                        new
-                        {
-                            Id = 47,
-                            CategoryId = 3,
-                            Content = "provident",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Dignissimos commodi a ut commodi recusandae suscipit distinctio.",
-                            UserId = 29
-                        },
-                        new
-                        {
-                            Id = 48,
-                            CategoryId = 2,
-                            Content = "Culpa consequatur est maxime tempore dolor.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Sunt aut cupiditate et perferendis eaque nobis.",
-                            UserId = 10
-                        },
-                        new
-                        {
-                            Id = 49,
-                            CategoryId = 5,
-                            Content = "consequuntur",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Aliquid accusantium totam deserunt enim in provident.",
-                            UserId = 31
-                        },
-                        new
-                        {
-                            Id = 50,
-                            CategoryId = 3,
-                            Content = "Ad dolor et autem aut omnis. Beatae officia numquam tempora. Vel maiores harum libero earum dolore ipsum. Dolores dolor sit sit nam quaerat error. Sunt quam voluptas repellendus repudiandae sunt architecto. Modi quibusdam laboriosam pariatur iure hic sed totam fuga.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "At voluptatem labore recusandae alias minima ex ut.",
-                            UserId = 9
-                        },
-                        new
-                        {
-                            Id = 51,
-                            CategoryId = 6,
-                            Content = "Dolores nulla inventore magni quo doloribus similique doloribus dolorem quis.\nTempore nostrum repudiandae repellendus dignissimos ratione.\nQuia adipisci perspiciatis et et iste tempora in et quia.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Eos rerum consequatur laborum velit et.",
-                            UserId = 35
-                        },
-                        new
-                        {
-                            Id = 52,
-                            CategoryId = 1,
-                            Content = "neque",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Aut amet et fuga sed in.",
-                            UserId = 39
-                        },
-                        new
-                        {
-                            Id = 53,
-                            CategoryId = 2,
-                            Content = "Dolorem ut maxime qui explicabo molestiae magnam.\nEt ut enim quis ea excepturi nesciunt sit autem quae.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Et vero illum sapiente consequatur aspernatur sit voluptas.",
-                            UserId = 31
-                        },
-                        new
-                        {
-                            Id = 54,
-                            CategoryId = 6,
-                            Content = "Autem culpa officiis voluptas autem praesentium.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Suscipit repellendus minima deleniti.",
-                            UserId = 7
-                        },
-                        new
-                        {
-                            Id = 55,
-                            CategoryId = 2,
-                            Content = "distinctio",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Culpa fuga enim quod dignissimos tempore provident est voluptas.",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 56,
-                            CategoryId = 5,
-                            Content = "Temporibus laudantium recusandae porro nulla vel numquam consequuntur odio atque.\nId sed esse quod nihil sint atque aut assumenda.\nQuo delectus reiciendis sint magni nam at.\nMaxime et aut eum nihil tenetur reiciendis.\nVel nulla rerum et sed quia eum eligendi.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Ipsam atque blanditiis qui non repudiandae consequatur porro qui.",
-                            UserId = 8
-                        },
-                        new
-                        {
-                            Id = 57,
-                            CategoryId = 3,
-                            Content = "Dolores tenetur quibusdam.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Dolore autem ipsum odit sed repudiandae eligendi doloremque.",
-                            UserId = 38
-                        },
-                        new
-                        {
-                            Id = 58,
-                            CategoryId = 2,
-                            Content = "Sapiente nihil quidem veritatis delectus vitae reprehenderit dolores quis.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Quo commodi natus optio ab voluptates voluptates dolor.",
-                            UserId = 26
-                        },
-                        new
-                        {
-                            Id = 59,
-                            CategoryId = 4,
-                            Content = "Quibusdam sequi debitis deleniti.\nPerferendis magni incidunt iusto aut fuga dolor dolor vel.\nVoluptas voluptate qui dolores ad harum.\nAmet soluta commodi.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Rerum officiis soluta praesentium.",
-                            UserId = 40
-                        },
-                        new
-                        {
-                            Id = 60,
-                            CategoryId = 5,
-                            Content = "fuga",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Animi eum voluptas soluta aspernatur sequi provident quisquam.",
-                            UserId = 7
-                        },
-                        new
-                        {
-                            Id = 61,
-                            CategoryId = 4,
-                            Content = "Iure quam perspiciatis ad voluptatem ipsa et. Minus ut velit sed quia esse corporis. Facere debitis totam magnam veritatis cumque. Quod quia delectus consequatur assumenda et sed beatae repudiandae.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Veniam quia est molestias eum non odit.",
-                            UserId = 20
-                        },
-                        new
-                        {
-                            Id = 62,
-                            CategoryId = 1,
-                            Content = "Dolor aut quis dolorem autem expedita.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Neque numquam velit.",
-                            UserId = 21
-                        },
-                        new
-                        {
-                            Id = 63,
-                            CategoryId = 2,
-                            Content = "ullam",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Dolorem illo ad sed odio est.",
-                            UserId = 21
-                        },
-                        new
-                        {
-                            Id = 64,
-                            CategoryId = 6,
-                            Content = "Ut rem facere velit saepe. Aut a velit saepe explicabo. Explicabo ex sapiente eveniet voluptas.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Dignissimos nobis in.",
-                            UserId = 22
-                        },
-                        new
-                        {
-                            Id = 65,
-                            CategoryId = 4,
-                            Content = "Nulla laborum et quisquam provident fugiat dolores quaerat et.\nIllum velit quia voluptas aut illo aspernatur beatae enim nisi.\nEos rerum qui unde ex qui.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Ex a repudiandae provident.",
-                            UserId = 22
-                        },
-                        new
-                        {
-                            Id = 66,
-                            CategoryId = 3,
-                            Content = "tempore",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Adipisci iusto nihil et reprehenderit odio.",
-                            UserId = 31
-                        },
-                        new
-                        {
-                            Id = 67,
-                            CategoryId = 4,
-                            Content = "distinctio",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Labore libero inventore animi.",
-                            UserId = 10
-                        },
-                        new
-                        {
-                            Id = 68,
-                            CategoryId = 2,
-                            Content = "Voluptatem sit nihil libero voluptas. Quia iusto quae et. Ipsum repudiandae voluptatem id porro et pariatur vero voluptate magnam. Laboriosam voluptatum totam asperiores veritatis quia reiciendis velit.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Ratione atque voluptatem esse magnam ut.",
-                            UserId = 14
-                        },
-                        new
-                        {
-                            Id = 69,
-                            CategoryId = 2,
-                            Content = "Dignissimos veritatis quos.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Dolorum dolore est consequatur odit.",
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 70,
-                            CategoryId = 5,
-                            Content = "A quae alias.\nDoloribus incidunt velit assumenda fugit.\nPraesentium pariatur est quis et voluptatem et et autem molestiae.\nQuibusdam sint et consectetur voluptatem consequatur.\nOmnis mollitia temporibus minima.\nLabore nam sed facilis explicabo sed.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Omnis voluptatem libero nemo incidunt laudantium esse.",
-                            UserId = 30
-                        },
-                        new
-                        {
-                            Id = 71,
-                            CategoryId = 6,
-                            Content = "Magnam exercitationem eum ut vel repellendus voluptatem iure.\nNeque magni quis dicta tempore quam ipsa consequatur.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Aut cum hic.",
-                            UserId = 32
-                        },
-                        new
-                        {
-                            Id = 72,
-                            CategoryId = 5,
-                            Content = "Fuga minus nulla reprehenderit totam.\nEt excepturi omnis autem dolor consequatur.\nAsperiores mollitia quas architecto enim consequatur dignissimos est omnis libero.\nNisi voluptatibus ut quisquam officia nam.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Dolor dolor totam provident impedit quisquam dolorum.",
-                            UserId = 32
-                        },
-                        new
-                        {
-                            Id = 73,
-                            CategoryId = 1,
-                            Content = "Et mollitia est voluptates ut non id quia.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Aliquam ad illo omnis repudiandae.",
-                            UserId = 34
-                        },
-                        new
-                        {
-                            Id = 74,
-                            CategoryId = 2,
-                            Content = "Et in et veritatis velit ab atque.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Voluptatum itaque quia est.",
-                            UserId = 10
-                        },
-                        new
-                        {
-                            Id = 75,
-                            CategoryId = 5,
-                            Content = "Soluta amet laboriosam consequatur.\nQuo dolor dolores praesentium optio ipsum.\nPossimus repellendus vel sit alias nihil non deleniti eveniet.\nEt est nihil nisi voluptatem voluptatibus sequi voluptas non.\nVoluptatem dolore aliquam sit nemo voluptatibus.\nIncidunt autem consequatur animi.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Ut molestiae aut ducimus cupiditate.",
-                            UserId = 15
-                        },
-                        new
-                        {
-                            Id = 76,
-                            CategoryId = 3,
-                            Content = "Eum minima est earum quasi.\nEt nisi optio atque est dignissimos excepturi.\nCommodi impedit sit similique voluptatibus nobis non.\nConsectetur consequatur nihil nulla.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Debitis quisquam et natus perspiciatis explicabo dignissimos illum.",
-                            UserId = 10
-                        },
-                        new
-                        {
-                            Id = 77,
-                            CategoryId = 5,
-                            Content = "Quasi et asperiores.\nEt tempora sequi.\nMaiores aperiam sit iure molestiae.\nSed id aut culpa dicta.\nLabore modi debitis commodi quis autem sunt autem omnis.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Iusto inventore voluptatem qui non saepe voluptates nihil.",
-                            UserId = 29
-                        },
-                        new
-                        {
-                            Id = 78,
-                            CategoryId = 2,
-                            Content = "Expedita molestiae vero nam magnam libero saepe qui qui sequi.\nNulla est illum.\nNulla omnis harum quod provident eos ea est eum.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Aut fuga ab reiciendis dolores voluptas est.",
-                            UserId = 34
-                        },
-                        new
-                        {
-                            Id = 79,
-                            CategoryId = 5,
-                            Content = "Aut et atque rerum. Qui dolores quaerat aut incidunt dolor. Unde inventore voluptas vel dolorem ullam nihil rem. Eligendi sit ducimus iure amet aut aut est.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Natus laboriosam ducimus possimus quia quae ullam ut consequuntur sit.",
-                            UserId = 22
-                        },
-                        new
-                        {
-                            Id = 80,
-                            CategoryId = 4,
-                            Content = "a",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Quidem doloribus deleniti similique cupiditate consequuntur quae.",
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 81,
-                            CategoryId = 4,
-                            Content = "expedita",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Necessitatibus tempore qui odit ut.",
-                            UserId = 25
-                        },
-                        new
-                        {
-                            Id = 82,
-                            CategoryId = 1,
-                            Content = "Eligendi est ducimus mollitia consectetur.\nVoluptatibus sed rerum voluptas.\nLaboriosam vel qui et odit modi dolor minima.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Sed nihil ullam rerum odit saepe rem esse veniam eaque.",
-                            UserId = 31
-                        },
-                        new
-                        {
-                            Id = 83,
-                            CategoryId = 5,
-                            Content = "odit",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Quia enim amet modi placeat rerum qui.",
-                            UserId = 23
-                        },
-                        new
-                        {
-                            Id = 84,
-                            CategoryId = 5,
-                            Content = "Saepe expedita libero perspiciatis qui enim. Enim inventore vero ad nobis dolorem. Laudantium modi nulla nemo qui rerum. Quibusdam facere asperiores mollitia suscipit iure. Ut impedit odit.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Aut quidem maxime ipsa adipisci voluptatem eos excepturi architecto.",
-                            UserId = 37
-                        },
-                        new
-                        {
-                            Id = 85,
-                            CategoryId = 3,
-                            Content = "sequi",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "At libero autem non iste.",
-                            UserId = 10
-                        },
-                        new
-                        {
-                            Id = 86,
-                            CategoryId = 3,
-                            Content = "debitis",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Est quibusdam repellendus sequi ea.",
-                            UserId = 31
-                        },
-                        new
-                        {
-                            Id = 87,
-                            CategoryId = 5,
-                            Content = "Et commodi laboriosam ut facere recusandae.\nDolores quae itaque libero rerum voluptatem enim velit quidem.\nAnimi harum sed.\nLaborum atque illo ipsa suscipit doloribus.\nEst veniam dolorum.\nAliquam voluptas aliquid quia blanditiis iusto ea nihil tempora vel.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Natus repudiandae libero assumenda aliquid temporibus voluptatem explicabo et.",
-                            UserId = 9
-                        },
-                        new
-                        {
-                            Id = 88,
-                            CategoryId = 1,
-                            Content = "Esse recusandae enim.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Dolorum et doloremque dolorum ipsa deserunt iure beatae.",
-                            UserId = 21
-                        },
-                        new
-                        {
-                            Id = 89,
-                            CategoryId = 5,
-                            Content = "Debitis dolor culpa adipisci quia nemo beatae aut et consequatur.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Veniam nemo esse rerum assumenda pariatur voluptas ipsam temporibus iure.",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 90,
-                            CategoryId = 3,
-                            Content = "Ipsam fugiat quo eum.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Porro rerum rem.",
-                            UserId = 35
-                        },
-                        new
-                        {
-                            Id = 91,
-                            CategoryId = 1,
-                            Content = "Provident delectus nemo qui facilis incidunt. Porro quia et. Quo aut vero. Sit rem nostrum optio repellat ullam.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Dignissimos ipsum magni.",
-                            UserId = 12
-                        },
-                        new
-                        {
-                            Id = 92,
-                            CategoryId = 4,
-                            Content = "ducimus",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Natus repellat a unde iste et et.",
-                            UserId = 14
-                        },
-                        new
-                        {
-                            Id = 93,
-                            CategoryId = 3,
-                            Content = "Atque et facere illo cumque.\nRepellat qui ut laborum.\nCumque quo nostrum deleniti nesciunt rerum.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Qui pariatur perspiciatis sint.",
-                            UserId = 33
-                        },
-                        new
-                        {
-                            Id = 94,
-                            CategoryId = 1,
-                            Content = "ab",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Nemo dolores explicabo cum nesciunt veniam.",
-                            UserId = 28
-                        },
-                        new
-                        {
-                            Id = 95,
-                            CategoryId = 3,
-                            Content = "A illum qui nemo consequatur nemo est repudiandae dolore.\nMollitia molestias magnam eos ad consequatur nihil rem.\nEt ullam saepe rem expedita aspernatur delectus qui sint.\nUt et esse.\nExcepturi ut minima sunt pariatur ad necessitatibus.\nDoloribus vero sunt porro alias quia.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Odit quaerat ipsam excepturi praesentium fugit et numquam magni perspiciatis.",
-                            UserId = 29
-                        },
-                        new
-                        {
-                            Id = 96,
-                            CategoryId = 5,
-                            Content = "dolores",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Facilis voluptate nihil architecto tempore.",
-                            UserId = 36
-                        },
-                        new
-                        {
-                            Id = 97,
-                            CategoryId = 5,
-                            Content = "est",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Ut molestiae non.",
-                            UserId = 7
-                        },
-                        new
-                        {
-                            Id = 98,
-                            CategoryId = 1,
-                            Content = "Delectus non nemo aperiam.\nItaque aspernatur possimus voluptas enim libero et perspiciatis maxime laboriosam.\nRem recusandae neque.\nUt dolorem placeat voluptatem a dolores ut eaque.\nRecusandae est est similique debitis nihil.\nAmet aperiam ducimus doloribus aut minima qui quam ipsum reiciendis.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Quo ut architecto dolor sapiente id quia repellat.",
-                            UserId = 23
-                        },
-                        new
-                        {
-                            Id = 99,
-                            CategoryId = 2,
-                            Content = "Sequi architecto ea in inventore quis. Fuga voluptatibus aliquid nam eaque nisi. Odio atque quia provident tenetur est voluptas voluptatibus voluptatibus. Odit esse facere vitae qui dolores ex sint voluptates sed. A quae officia. Asperiores repellat quibusdam.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Iusto fuga quisquam pariatur et omnis numquam.",
-                            UserId = 21
-                        },
-                        new
-                        {
-                            Id = 100,
-                            CategoryId = 1,
-                            Content = "Vel nobis consequatur accusantium dolores quia explicabo. Nostrum rerum sed ipsam eaque nulla. Placeat magni aut et atque odio qui voluptatum sapiente est. Autem ex aspernatur impedit dolores eos tempore.",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            MainImg = "https://via.placeholder.com/150x150/cccccc/9c9c9c.png",
-                            Title = "Fuga et qui minima.",
-                            UserId = 32
-                        });
                 });
 
             modelBuilder.Entity("NewsBlog.Domain.PostRating", b =>
@@ -1315,11 +141,20 @@ namespace NewsBlog.EfDataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RatingId")
+                    b.Property<int>("Rating")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -1327,67 +162,49 @@ namespace NewsBlog.EfDataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
-
-                    b.HasIndex("RatingId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("PostRatings");
                 });
 
-            modelBuilder.Entity("NewsBlog.Domain.Rating", b =>
+            modelBuilder.Entity("NewsBlog.Domain.PostTag", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Ratings");
-                });
-
-            modelBuilder.Entity("NewsBlog.Domain.ReadingList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PostId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("PostTags");
+                });
+
+            modelBuilder.Entity("NewsBlog.Domain.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ReadingLists");
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("NewsBlog.Domain.UseCaseLog", b =>
@@ -1400,10 +217,16 @@ namespace NewsBlog.EfDataAccess.Migrations
                     b.Property<string>("Actor")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Data")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UseCaseName")
@@ -1425,7 +248,6 @@ namespace NewsBlog.EfDataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
@@ -1435,6 +257,9 @@ namespace NewsBlog.EfDataAccess.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
@@ -1450,413 +275,21 @@ namespace NewsBlog.EfDataAccess.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Username")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("Email");
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
+                    b.HasIndex("Username")
+                        .IsUnique()
+                        .HasFilter("[Username] IS NOT NULL");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2021, 5, 3, 14, 18, 42, 955, DateTimeKind.Local).AddTicks(3060),
-                            Email = "Haley9@hotmail.com",
-                            FirstName = "Ludwig",
-                            IsActive = true,
-                            LastName = "Kuphal",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2021, 5, 4, 2, 26, 3, 23, DateTimeKind.Local).AddTicks(1786),
-                            Email = "Darby.Batz83@gmail.com",
-                            FirstName = "Zora",
-                            IsActive = true,
-                            LastName = "Davis",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2021, 5, 3, 15, 31, 34, 638, DateTimeKind.Local).AddTicks(2054),
-                            Email = "Sanford.Zemlak17@hotmail.com",
-                            FirstName = "Duncan",
-                            IsActive = true,
-                            LastName = "Lubowitz",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedAt = new DateTime(2021, 5, 4, 4, 58, 43, 149, DateTimeKind.Local).AddTicks(1594),
-                            Email = "Chaz40@gmail.com",
-                            FirstName = "Clare",
-                            IsActive = true,
-                            LastName = "Franecki",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedAt = new DateTime(2021, 5, 3, 18, 43, 3, 123, DateTimeKind.Local).AddTicks(5530),
-                            Email = "Ila.Willms@hotmail.com",
-                            FirstName = "Sharon",
-                            IsActive = true,
-                            LastName = "Ratke",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreatedAt = new DateTime(2021, 5, 3, 20, 59, 9, 639, DateTimeKind.Local).AddTicks(2233),
-                            Email = "Chaim.Will51@hotmail.com",
-                            FirstName = "Rita",
-                            IsActive = true,
-                            LastName = "Kiehn",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CreatedAt = new DateTime(2021, 5, 4, 6, 40, 15, 629, DateTimeKind.Local).AddTicks(8655),
-                            Email = "Kaycee_OConner@hotmail.com",
-                            FirstName = "Clotilde",
-                            IsActive = true,
-                            LastName = "Nitzsche",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CreatedAt = new DateTime(2021, 5, 3, 16, 22, 42, 815, DateTimeKind.Local).AddTicks(1260),
-                            Email = "Montana.Schuster@hotmail.com",
-                            FirstName = "Benjamin",
-                            IsActive = true,
-                            LastName = "Torp",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CreatedAt = new DateTime(2021, 5, 3, 21, 31, 50, 71, DateTimeKind.Local).AddTicks(855),
-                            Email = "Bradley93@yahoo.com",
-                            FirstName = "Myrtis",
-                            IsActive = true,
-                            LastName = "Carroll",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CreatedAt = new DateTime(2021, 5, 3, 20, 6, 35, 84, DateTimeKind.Local).AddTicks(6096),
-                            Email = "Jonathon.Abshire96@yahoo.com",
-                            FirstName = "Brook",
-                            IsActive = true,
-                            LastName = "Cronin",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CreatedAt = new DateTime(2021, 5, 4, 9, 21, 4, 666, DateTimeKind.Local).AddTicks(1496),
-                            Email = "Lonny7@yahoo.com",
-                            FirstName = "Karley",
-                            IsActive = true,
-                            LastName = "Johnson",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CreatedAt = new DateTime(2021, 5, 3, 22, 27, 5, 634, DateTimeKind.Local).AddTicks(7776),
-                            Email = "Donna87@hotmail.com",
-                            FirstName = "Cory",
-                            IsActive = true,
-                            LastName = "Steuber",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CreatedAt = new DateTime(2021, 5, 4, 8, 19, 5, 348, DateTimeKind.Local).AddTicks(6057),
-                            Email = "Madelyn_Howell70@yahoo.com",
-                            FirstName = "Faustino",
-                            IsActive = true,
-                            LastName = "Emmerich",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CreatedAt = new DateTime(2021, 5, 3, 14, 47, 34, 71, DateTimeKind.Local).AddTicks(6143),
-                            Email = "Arne42@gmail.com",
-                            FirstName = "Harrison",
-                            IsActive = true,
-                            LastName = "Kuhn",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CreatedAt = new DateTime(2021, 5, 4, 12, 2, 58, 495, DateTimeKind.Local).AddTicks(9308),
-                            Email = "Margot_Dickinson55@gmail.com",
-                            FirstName = "Andreanne",
-                            IsActive = true,
-                            LastName = "Gorczany",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CreatedAt = new DateTime(2021, 5, 3, 13, 35, 46, 798, DateTimeKind.Local).AddTicks(4966),
-                            Email = "Euna54@gmail.com",
-                            FirstName = "Nick",
-                            IsActive = true,
-                            LastName = "Kohler",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CreatedAt = new DateTime(2021, 5, 4, 0, 53, 37, 473, DateTimeKind.Local).AddTicks(7601),
-                            Email = "Elnora_Grady76@hotmail.com",
-                            FirstName = "Madyson",
-                            IsActive = true,
-                            LastName = "Pfeffer",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CreatedAt = new DateTime(2021, 5, 4, 3, 4, 28, 487, DateTimeKind.Local).AddTicks(721),
-                            Email = "Alfreda.Yost@hotmail.com",
-                            FirstName = "Esta",
-                            IsActive = true,
-                            LastName = "Roberts",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            CreatedAt = new DateTime(2021, 5, 4, 9, 45, 12, 746, DateTimeKind.Local).AddTicks(7870),
-                            Email = "Stan72@hotmail.com",
-                            FirstName = "Trisha",
-                            IsActive = true,
-                            LastName = "Rippin",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            CreatedAt = new DateTime(2021, 5, 3, 20, 9, 13, 481, DateTimeKind.Local).AddTicks(8472),
-                            Email = "Joana34@yahoo.com",
-                            FirstName = "Georgianna",
-                            IsActive = true,
-                            LastName = "Volkman",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            CreatedAt = new DateTime(2021, 5, 3, 14, 22, 30, 837, DateTimeKind.Local).AddTicks(98),
-                            Email = "Kendall.McDermott60@yahoo.com",
-                            FirstName = "Brooklyn",
-                            IsActive = true,
-                            LastName = "Mante",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 22,
-                            CreatedAt = new DateTime(2021, 5, 3, 13, 9, 50, 787, DateTimeKind.Local).AddTicks(1561),
-                            Email = "Marty_Wisozk89@gmail.com",
-                            FirstName = "Misael",
-                            IsActive = true,
-                            LastName = "Olson",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 23,
-                            CreatedAt = new DateTime(2021, 5, 4, 7, 16, 10, 3, DateTimeKind.Local).AddTicks(2891),
-                            Email = "Alta.Kuvalis@hotmail.com",
-                            FirstName = "Colin",
-                            IsActive = true,
-                            LastName = "Jenkins",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 24,
-                            CreatedAt = new DateTime(2021, 5, 4, 7, 30, 10, 345, DateTimeKind.Local).AddTicks(7861),
-                            Email = "Devyn40@gmail.com",
-                            FirstName = "Stefanie",
-                            IsActive = true,
-                            LastName = "Windler",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 25,
-                            CreatedAt = new DateTime(2021, 5, 4, 9, 17, 43, 933, DateTimeKind.Local).AddTicks(9592),
-                            Email = "Nathanial33@gmail.com",
-                            FirstName = "Sonya",
-                            IsActive = true,
-                            LastName = "Johnston",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 26,
-                            CreatedAt = new DateTime(2021, 5, 3, 21, 41, 8, 312, DateTimeKind.Local).AddTicks(2099),
-                            Email = "Kurtis.Jenkins@yahoo.com",
-                            FirstName = "Yasmine",
-                            IsActive = true,
-                            LastName = "Kemmer",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 27,
-                            CreatedAt = new DateTime(2021, 5, 4, 11, 4, 57, 985, DateTimeKind.Local).AddTicks(6535),
-                            Email = "Tom6@gmail.com",
-                            FirstName = "Leon",
-                            IsActive = true,
-                            LastName = "Stoltenberg",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 28,
-                            CreatedAt = new DateTime(2021, 5, 3, 21, 44, 57, 35, DateTimeKind.Local).AddTicks(5170),
-                            Email = "Hubert.Kuhic@hotmail.com",
-                            FirstName = "Hollis",
-                            IsActive = true,
-                            LastName = "Hoeger",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 29,
-                            CreatedAt = new DateTime(2021, 5, 4, 11, 16, 39, 533, DateTimeKind.Local).AddTicks(2945),
-                            Email = "Ezequiel16@gmail.com",
-                            FirstName = "Myriam",
-                            IsActive = true,
-                            LastName = "Kunde",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 30,
-                            CreatedAt = new DateTime(2021, 5, 4, 0, 30, 27, 607, DateTimeKind.Local).AddTicks(4441),
-                            Email = "Anthony_Turcotte@gmail.com",
-                            FirstName = "Antonina",
-                            IsActive = true,
-                            LastName = "Predovic",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 31,
-                            CreatedAt = new DateTime(2021, 5, 3, 17, 1, 0, 341, DateTimeKind.Local).AddTicks(9617),
-                            Email = "Palma.Yost@yahoo.com",
-                            FirstName = "Raphaelle",
-                            IsActive = true,
-                            LastName = "Leannon",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 32,
-                            CreatedAt = new DateTime(2021, 5, 4, 3, 35, 19, 425, DateTimeKind.Local).AddTicks(4052),
-                            Email = "Haskell_Graham34@gmail.com",
-                            FirstName = "Fleta",
-                            IsActive = true,
-                            LastName = "Boyer",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 33,
-                            CreatedAt = new DateTime(2021, 5, 4, 11, 22, 10, 970, DateTimeKind.Local).AddTicks(8536),
-                            Email = "Euna.Schmitt69@hotmail.com",
-                            FirstName = "Victor",
-                            IsActive = true,
-                            LastName = "Stanton",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 34,
-                            CreatedAt = new DateTime(2021, 5, 3, 21, 15, 12, 969, DateTimeKind.Local).AddTicks(100),
-                            Email = "Zander_Conroy39@gmail.com",
-                            FirstName = "Ruthie",
-                            IsActive = true,
-                            LastName = "Crist",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 35,
-                            CreatedAt = new DateTime(2021, 5, 3, 12, 26, 47, 299, DateTimeKind.Local).AddTicks(5556),
-                            Email = "Letha27@gmail.com",
-                            FirstName = "Violette",
-                            IsActive = true,
-                            LastName = "Ziemann",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 36,
-                            CreatedAt = new DateTime(2021, 5, 3, 19, 6, 48, 93, DateTimeKind.Local).AddTicks(705),
-                            Email = "Nicholas71@hotmail.com",
-                            FirstName = "Kianna",
-                            IsActive = true,
-                            LastName = "Smith",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 37,
-                            CreatedAt = new DateTime(2021, 5, 4, 10, 4, 32, 131, DateTimeKind.Local).AddTicks(2759),
-                            Email = "Cale.Anderson@hotmail.com",
-                            FirstName = "Troy",
-                            IsActive = true,
-                            LastName = "Price",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 38,
-                            CreatedAt = new DateTime(2021, 5, 3, 14, 43, 7, 700, DateTimeKind.Local).AddTicks(3560),
-                            Email = "Nicolette.Hettinger82@gmail.com",
-                            FirstName = "Vanessa",
-                            IsActive = true,
-                            LastName = "Morar",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 39,
-                            CreatedAt = new DateTime(2021, 5, 4, 10, 38, 8, 99, DateTimeKind.Local).AddTicks(762),
-                            Email = "Antone_Hegmann@yahoo.com",
-                            FirstName = "Dwight",
-                            IsActive = true,
-                            LastName = "Osinski",
-                            Password = "sifra1"
-                        },
-                        new
-                        {
-                            Id = 40,
-                            CreatedAt = new DateTime(2021, 5, 4, 5, 24, 38, 998, DateTimeKind.Local).AddTicks(3608),
-                            Email = "Uriah.Grady33@yahoo.com",
-                            FirstName = "Raphael",
-                            IsActive = true,
-                            LastName = "Hettinger",
-                            Password = "sifra1"
-                        });
                 });
 
             modelBuilder.Entity("NewsBlog.Domain.UserUseCase", b =>
@@ -1865,6 +298,15 @@ namespace NewsBlog.EfDataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UseCaseId")
                         .HasColumnType("int");
@@ -1881,6 +323,11 @@ namespace NewsBlog.EfDataAccess.Migrations
 
             modelBuilder.Entity("NewsBlog.Domain.Comment", b =>
                 {
+                    b.HasOne("NewsBlog.Domain.Comment", "Parent")
+                        .WithMany("ChildrenComments")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("NewsBlog.Domain.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
@@ -1893,20 +340,11 @@ namespace NewsBlog.EfDataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Parent");
+
                     b.Navigation("Post");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("NewsBlog.Domain.Image", b =>
-                {
-                    b.HasOne("NewsBlog.Domain.Post", "Post")
-                        .WithMany("Images")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("NewsBlog.Domain.Post", b =>
@@ -1936,12 +374,6 @@ namespace NewsBlog.EfDataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NewsBlog.Domain.Rating", "Rating")
-                        .WithMany()
-                        .HasForeignKey("RatingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("NewsBlog.Domain.User", "User")
                         .WithMany("Ratings")
                         .HasForeignKey("UserId")
@@ -1950,28 +382,26 @@ namespace NewsBlog.EfDataAccess.Migrations
 
                     b.Navigation("Post");
 
-                    b.Navigation("Rating");
-
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("NewsBlog.Domain.ReadingList", b =>
+            modelBuilder.Entity("NewsBlog.Domain.PostTag", b =>
                 {
                     b.HasOne("NewsBlog.Domain.Post", "Post")
-                        .WithMany("ReadingLists")
+                        .WithMany("PostTags")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("NewsBlog.Domain.User", "User")
-                        .WithMany("ReadingLists")
-                        .HasForeignKey("UserId")
+                    b.HasOne("NewsBlog.Domain.Tag", "Tag")
+                        .WithMany("PostTags")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Post");
 
-                    b.Navigation("User");
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("NewsBlog.Domain.UserUseCase", b =>
@@ -1990,15 +420,23 @@ namespace NewsBlog.EfDataAccess.Migrations
                     b.Navigation("Posts");
                 });
 
+            modelBuilder.Entity("NewsBlog.Domain.Comment", b =>
+                {
+                    b.Navigation("ChildrenComments");
+                });
+
             modelBuilder.Entity("NewsBlog.Domain.Post", b =>
                 {
                     b.Navigation("Comments");
 
-                    b.Navigation("Images");
+                    b.Navigation("PostTags");
 
                     b.Navigation("Ratings");
+                });
 
-                    b.Navigation("ReadingLists");
+            modelBuilder.Entity("NewsBlog.Domain.Tag", b =>
+                {
+                    b.Navigation("PostTags");
                 });
 
             modelBuilder.Entity("NewsBlog.Domain.User", b =>
@@ -2008,8 +446,6 @@ namespace NewsBlog.EfDataAccess.Migrations
                     b.Navigation("Posts");
 
                     b.Navigation("Ratings");
-
-                    b.Navigation("ReadingLists");
 
                     b.Navigation("UserUseCases");
                 });

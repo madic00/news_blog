@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
-using NewsBlog.BusinessLayer.Queries;
-using NewsBlog.BusinessLayer.Searches;
+using AutoMapper.QueryableExtensions;
+using NewsBlog.Application.DataTransfer;
+using NewsBlog.Application.Queries;
+using NewsBlog.Application.Searches;
+using NewsBlog.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +16,8 @@ namespace NewsBlog.Implementation.Extensions
     {
         public static PageResponse<TDto> Paged<TDto, TEntity>(
             this IQueryable<TEntity> query, PageSearch search, IMapper mapper)
-            where TDto : class
+            where TEntity : Entity
+            where TDto : BaseDto
         {
             var skipCount = search.PerPage * (search.Page - 1);
 
@@ -24,10 +28,17 @@ namespace NewsBlog.Implementation.Extensions
                 CurrentPage = search.Page,
                 ItemsPerPage = search.PerPage,
                 TotalCount = query.Count(),
-                Items = mapper.Map<IEnumerable<TDto>>(skipped)
+                Items = skipped.ProjectTo<TDto>(mapper.ConfigurationProvider).ToList()
             };
 
             return response;
+        }
+
+        public static IQueryable<T> OnlyActive<T>(this IQueryable<T> query) where T : Entity
+        {
+            query = query.Where(x => x.IsActive == true);
+
+            return query;
         }
     }
 }

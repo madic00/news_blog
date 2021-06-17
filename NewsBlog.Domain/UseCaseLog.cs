@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace NewsBlog.Domain
 {
-    public class UseCaseLog
+    public class UseCaseLog : Entity
     {
-        public int Id { get; set; }
-
-        public DateTime Date { get; set; }
-
         public string UseCaseName { get; set; }
 
         public string Data { get; set; }

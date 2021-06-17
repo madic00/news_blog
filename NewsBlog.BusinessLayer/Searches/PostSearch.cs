@@ -1,18 +1,26 @@
-﻿using System;
+﻿using Doublel.DynamicQueryBuilder;
+using Doublel.DynamicQueryBuilder.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewsBlog.BusinessLayer.Searches
+namespace NewsBlog.Application.Searches
 {
     public class PostSearch : PageSearch
     {
-        public string Title { get; set; }
+        [QueryProperties(ComparisonOperator.Contains, "Title", "Content")]
+        public string Keyword { get; set; }
 
-        public string Content { get; set; }
+        [QueryProperty]
+        public int? CategoryId { get; set; }
 
-        public int CategoryId { get; set; }
+        //[QueryProperty(ComparisonOperator.MoreThan, "AverageRating")]
+        //public int? MinRating { get; set; }
+
+        //[QueryProperty(ComparisonOperator.LessThan)]
+        //public int? MaxRating { get; set; }
 
 
     }

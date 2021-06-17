@@ -1,5 +1,5 @@
-﻿using NewsBlog.BusinessLayer.DataTransfer;
-using NewsBlog.BusinessLayer.Email;
+﻿using NewsBlog.Application.DataTransfer;
+using NewsBlog.Application.Email;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,7 @@ namespace NewsBlog.Implementation.Email
                 Credentials = new NetworkCredential("aspictrs@gmail.com", "Sifra123!")
             };
 
-            var message = new MailMessage("aspictrs@gmail.com", dto.SendTo);
+            var message = new MailMessage("aspictrs@gmail.com", dto.SendFrom);
             message.Subject = dto.Subject;
             message.Body = dto.Content;
             message.IsBodyHtml = true;

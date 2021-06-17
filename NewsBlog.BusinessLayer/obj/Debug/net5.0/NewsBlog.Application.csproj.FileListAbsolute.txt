@@ -1,0 +1,17 @@
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.Application.deps.json
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.Application.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\ref\NewsBlog.Application.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.Application.pdb
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.Domain.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.EfDataAccess.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.Domain.pdb
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\bin\Debug\net5.0\NewsBlog.EfDataAccess.pdb
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.Application.csprojAssemblyReference.cache
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.Application.AssemblyInfoInputs.cache
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.Application.AssemblyInfo.cs
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.Application.csproj.CoreCompileInputs.cache
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.Application.csproj.CopyComplete
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.Application.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\ref\NewsBlog.Application.dll
+D:\projekti\ASP\NewsBlog\NewsBlog.BusinessLayer\obj\Debug\net5.0\NewsBlog.Application.pdb

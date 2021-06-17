@@ -1,11 +1,11 @@
-﻿using NewsBlog.BusinessLayer.DataTransfer;
+﻿using NewsBlog.Application.DataTransfer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewsBlog.BusinessLayer.Email
+namespace NewsBlog.Application.Email
 {
     public interface IEmailSender
     {

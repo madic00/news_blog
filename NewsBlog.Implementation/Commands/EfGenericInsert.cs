@@ -5,16 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NewsBlog.BusinessLayer;
+using NewsBlog.Application;
 using NewsBlog.EfDataAccess;
 using NewsBlog.Domain;
-using NewsBlog.BusinessLayer.DataTransfer;
+using NewsBlog.Application.DataTransfer;
 
 namespace NewsBlog.Implementation.Commands
 {
-    public abstract class EfGenericInsert<T, TEntity> : ICommand<T> 
+    public abstract class EfGenericInsert<TDto, TEntity> : ICommand<TDto> 
         where TEntity : Entity
-        where T : BaseDto
+        where TDto : BaseDto
     {
         public abstract int Id { get; }
 
@@ -22,21 +22,16 @@ namespace NewsBlog.Implementation.Commands
 
         private readonly NewsBlogContext _context;
         private readonly IMapper _mapper;
-        private readonly AbstractValidator<T> _validator;
+        private readonly AbstractValidator<TDto> _validator;
 
-        protected EfGenericInsert(NewsBlogContext context, IMapper mapper, AbstractValidator<T> validator)
+        protected EfGenericInsert(NewsBlogContext context, IMapper mapper, AbstractValidator<TDto> validator)
         {
             _context = context;
             _mapper = mapper;
             _validator = validator;
         }
 
-        protected EfGenericInsert(NewsBlogContext context)
-        {
-            _context = context;
-        }
-
-        public void Execute(T request)
+        public void Execute(TDto request)
         {
             _validator.ValidateAndThrow(request);
 

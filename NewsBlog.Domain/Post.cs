@@ -22,13 +22,11 @@ namespace NewsBlog.Domain
 
         public virtual Category Category { get; set; }
 
-        public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();
-
-        public virtual ICollection<ReadingList> ReadingLists { get; set; } = new HashSet<ReadingList>();
-        
         public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
 
-        public virtual ICollection<PostRating> Ratings { get; set; } = new HashSet<PostRating>();
+        public virtual ICollection<PostRating> Ratings { get; set; }
+
+        public virtual ICollection<PostTag> PostTags { get; set; } = new HashSet<PostTag>();
 
     }
 }

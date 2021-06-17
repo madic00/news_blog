@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NewsBlog.BusinessLayer;
-using NewsBlog.BusinessLayer.Exceptions;
+using NewsBlog.Application;
+using NewsBlog.Application.Exceptions;
 using NewsBlog.EfDataAccess;
 using NewsBlog.Domain;
 

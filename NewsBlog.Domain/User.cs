@@ -11,9 +11,11 @@ namespace NewsBlog.Domain
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public virtual ICollection<Post> Posts { get; set; } = new HashSet<Post>();
-        public virtual ICollection<ReadingList> ReadingLists { get; set; } = new HashSet<ReadingList>();
+        public string Username { get; set; }
 
+        public bool IsAdmin { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; } = new HashSet<Post>();
         public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
 
         public virtual ICollection<UserUseCase> UserUseCases { get; set; }

@@ -6,26 +6,26 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using NewsBlog.BusinessLayer;
-using NewsBlog.BusinessLayer.DataTransfer;
-using NewsBlog.BusinessLayer.Exceptions;
+using NewsBlog.Application;
+using NewsBlog.Application.DataTransfer;
+using NewsBlog.Application.Exceptions;
 using NewsBlog.EfDataAccess;
 using NewsBlog.Domain;
 
 namespace NewsBlog.Implementation.Commands
 {
-    public abstract class EfGenericUpdate<T, TEntity> : ICommand<T>
+    public abstract class EfGenericUpdate<TDto, TEntity> : ICommand<TDto>
         where TEntity : Entity
-        where T : BaseDto
+        where TDto : BaseDto
     {
         public abstract int Id { get; }
         public abstract string Name { get; }
 
         private readonly NewsBlogContext _context;
         private readonly IMapper _mapper;
-        private readonly AbstractValidator<T> _validator;
+        private readonly AbstractValidator<TDto> _validator;
 
-        protected EfGenericUpdate(NewsBlogContext context, IMapper mapper, AbstractValidator<T> validator)
+        protected EfGenericUpdate(NewsBlogContext context, IMapper mapper, AbstractValidator<TDto> validator)
         {
             _context = context;
             _mapper = mapper;
@@ -37,7 +37,7 @@ namespace NewsBlog.Implementation.Commands
             _context = context;
         }
 
-        public void Execute(T request)
+        public void Execute(TDto request)
         {
             _validator.ValidateAndThrow(request);
 

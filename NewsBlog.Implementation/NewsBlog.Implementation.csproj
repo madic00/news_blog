@@ -5,13 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NewsBlog.BusinessLayer\NewsBlog.BusinessLayer.csproj" />
+    <ProjectReference Include="..\NewsBlog.BusinessLayer\NewsBlog.Application.csproj" />
     <ProjectReference Include="..\NewsBlog.Domain\NewsBlog.Domain.csproj" />
     <ProjectReference Include="..\NewsBlog.EfDataAccess\NewsBlog.EfDataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Doublel.QueryableBuilder" Version="1.2.2" />
     <PackageReference Include="FluentValidation" Version="10.0.4" />
+	<PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
   </ItemGroup>
 
 </Project>

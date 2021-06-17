@@ -1,3 +1,4 @@
+using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -12,12 +13,15 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NewsBlog.Api.Core;
-using NewsBlog.BusinessLayer;
-using NewsBlog.BusinessLayer.DataTransfer;
-using NewsBlog.BusinessLayer.Email;
+using NewsBlog.Application;
+using NewsBlog.Application.DataTransfer;
+using NewsBlog.Application.Email;
+using NewsBlog.Application.UploadFile;
 using NewsBlog.EfDataAccess;
 using NewsBlog.Implementation.Email;
 using NewsBlog.Implementation.Logging;
+using NewsBlog.Implementation.Profiles;
+using NewsBlog.Implementation.UploadFile;
 using NewsBlog.Implementation.Validators;
 using Newtonsoft.Json;
 using System;
@@ -25,7 +29,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Zadatak2.UserInterface.Core;
 
 namespace NewsBlog.Api
 {
@@ -48,11 +51,13 @@ namespace NewsBlog.Api
             //services.AddTransient<IDeleteGroupCommand, EfDeleteGroupCommand>();
             //services.AddTransient<IGetGroupsQuery, EfGetGroupsQuery>();
             //services.AddTransient<IEditGroupCommand, EfEditGroupCommand>();
-            //services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
+            //services.AddTransient<IRegisterUserCommand, EfCreateUserCommand>();
 
             DIExtensions.AddCommandsAndQueries(services);
+            DIExtensions.AddValidators(services);
 
             services.AddTransient<IEmailSender, SmtpEmailSender>();
+            services.AddTransient<IUploadFile, UploadFile>();
             //services.AddTransient<IUseCaseExecutor, UseCaseExecutorWithCheck>();
 
             services.AddHttpContextAccessor();
@@ -77,8 +82,8 @@ namespace NewsBlog.Api
 
             services.AddTransient<UseCaseExecutor>();
             services.AddTransient<IUseCaseLogger, DatabaseUseCaseLogger>();
-            services.AddTransient<RegisterUserValidator>();
-            services.AddTransient<AbstractValidator<RegisterUserDto>, RegisterUserValidator>();
+            //services.AddTransient<RegisterUserValidator>();
+            //services.AddTransient<AbstractValidator<AdminCreateUserDto>, RegisterUserValidator>();
 
             services.AddTransient<JwtManager>();
 
@@ -104,13 +109,59 @@ namespace NewsBlog.Api
                 };
             });
 
-            services.AddAutoMapper(typeof(UserDto).Assembly);
+            services.AddSingleton(provider => new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new CommentProfile(provider.GetService<IApplicationActor>()));
+                cfg.AddProfile(new PostRatingProfile(provider.GetService<IApplicationActor>()));
+                cfg.AddProfile(new UserProfile(provider.GetService<IApplicationActor>()));
+                cfg.AddProfile(new PostProfile());
+                cfg.AddProfile(new CategoryProfile());
+                cfg.AddProfile(new PostTagProfile());
+                cfg.AddProfile(new UseCaseLogProfile());
+                cfg.AddProfile(new UserUseCaseProfile());
+            }).CreateMapper());
 
-            services.AddControllers();
+            //services.AddAutoMapper(typeof(PostProfile).Assembly);
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NewsBlog.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "News Blog", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
+                      Enter 'Bearer' [space] and then your token in the text input below.
+                      \r\n\r\nExample: 'Bearer 12345abcdef'",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                          {
+                            Reference = new OpenApiReference
+                              {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                              },
+                              Scheme = "oauth2",
+                              Name = "Bearer",
+                              In = ParameterLocation.Header,
+
+                            },
+                            new List<string>()
+                          }
+                    });
             });
+
+            services.AddControllers();
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "NewsBlog.Api", Version = "v1" });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -119,11 +170,27 @@ namespace NewsBlog.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NewsBlog.Api v1"));
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NewsBlog.Api v1"));
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(x =>
+            {
+                x.AllowAnyOrigin();
+                x.AllowAnyMethod();
+                x.AllowAnyHeader();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "News Blog v1");
+            });
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 

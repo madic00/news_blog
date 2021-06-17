@@ -13,19 +13,21 @@ namespace NewsBlog.EfDataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<Post> builder)
         {
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.Title).IsRequired().HasMaxLength(100).HasColumnType("varchar");
 
             builder.Property(x => x.Content).IsRequired().HasColumnType("text");
 
-            builder.Property(x => x.MainImg).IsRequired().HasColumnType("varchar");
+            builder.Property(x => x.MainImg).IsRequired().HasColumnType("varchar").HasMaxLength(100);
 
             builder.Property(x => x.UserId).IsRequired().HasColumnType("int");
             builder.Property(x => x.CategoryId).IsRequired().HasColumnType("int");
 
-            builder.HasMany(p => p.Images)
+            builder.HasMany(p => p.PostTags)
                 .WithOne(i => i.Post)
                 .HasForeignKey(i => i.PostId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(p => p.Comments)
                 .WithOne(c => c.Post)
@@ -36,7 +38,6 @@ namespace NewsBlog.EfDataAccess.Configurations
                 .WithOne(c => c.Post)
                 .HasForeignKey(c => c.PostId)
                 .OnDelete(DeleteBehavior.Cascade);
-
 
         }
     }

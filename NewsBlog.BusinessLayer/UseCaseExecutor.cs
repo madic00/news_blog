@@ -1,11 +1,11 @@
-﻿using NewsBlog.BusinessLayer.Exceptions;
+﻿using NewsBlog.Application.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewsBlog.BusinessLayer
+namespace NewsBlog.Application
 {
     public class UseCaseExecutor
     {
@@ -23,19 +23,26 @@ namespace NewsBlog.BusinessLayer
            
             _logger.Log(command, _actor, request);
 
-            command.Execute(request);
+            if (_actor.AllowedUseCases.Contains(command.Id) || _actor.IsAdmin)
+            {
+                command.Execute(request);
+            } else
+            {
+                throw new UnauthorizedUseCaseException(command, _actor);
+            }
+
         }
 
-        public TResult ExecuteQuery<TSearch, TResult>(IQuery<TSearch, TResult> query, TSearch search)
+        public TResult ExecuteQuery<TResult, TSearch>(IQuery<TResult, TSearch> query, TSearch search)
         {
             _logger.Log(query, _actor, search);
 
-            //if (!_actor.AllowedUseCases.Contains(query.Id))
-            //{
-            //    throw new UnauthorizedUseCaseException(query, _actor);
-            //}
-
-            return query.Execute(search);
+            if (_actor.AllowedUseCases.Contains(query.Id) || _actor.IsAdmin)
+            {
+                return query.Execute(search);
+            }
+            
+            throw new UnauthorizedUseCaseException(query, _actor);
 
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewsBlog.BusinessLayer.DataTransfer
+namespace NewsBlog.Application.DataTransfer
 {
     public abstract class BaseDto
     {

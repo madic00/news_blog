@@ -1,0 +1,84 @@
+var posts = new List<Post>
+            {
+                new Post
+                {
+                    Title = "Is Fluoride Bad for You? Effects for Thyroid & Body",
+                    Content = "In the early part of the twentieth century, it was discovered that small communities who had higher levels of naturally occurring fluoride in their drinking water had fewer dental caries (cavities). Naturally fluoridated water at about 1mg/L seemed to be beneficial to dental health. (Fluoride that is naturally occurring is calcium fluoride.)" +
+                    "Unfortunately, the fluoride that is often added to water supplies in the U.S. is hydrofluoric acid (an industrial by-product), not elemental fluorine or calcium fluoride. It’s well known that naturally occurring substances(even heavy metals) are generally better tolerated by the body than synthetic counterparts." +
+                    "But because early studies showed few dental caries in communities using fluoridated water, fluoridated water became known as one of 10 best public health achievements of the twentieth century according to the Center for Disease Control (CDC).",
+                    MainImg = "post-one.jpg",
+                    UserId = 1,
+                    CategoryId = 5,
+                },
+                new Post
+                {
+                    Title = "Fresh Strawberry Pie (Gluten and Dairy Free)",
+                    Content = "This recipe is just for the filling for a strawberry pie. You’re going to need to bake a single crust pie crust first. You can use any recipe you’d like, but if you need something gluten free, try my almond flour pie crust recipe. I use it for my healthy key lime pie recipe as well." +
+                    "Ingredients: 5 cups strawberries (about 35), " +
+                    "2 TBSP honey ¼ cup water, 2 TBSP arrowroot powder, 1 tsp lemon juice, 1 cup whipped cream or whipped coconut cream (for topping, optional). Prebake a pie crust, such as this almond flour crust.While crust is baking, wash the strawberries and remove the tops.Slice the strawberries.Set aside 1 cup of strawberry slices and place the rest in a medium sized saucepan.Sprinkle the strawberries in the pan with arrowroot powder and stir gently.Stir in the honey, water, and lemon juice.Turn on the heat to medium-low and stir and simmer until it thickens.Pour the filling into the baked pie crust.Arrange the reserved strawberry slices over the top of the pie. Chill before serving. Top with whipped cream or whipped coconut cream if desired. ",
+                    MainImg = "post-two.jpg",
+                    CategoryId = 3
+                },
+                new Post
+                {
+                    Title = "Eco-Friendly Commuting Just Took a Stylish Turn: The Best Electric Scooters",
+                    Content = "Not just reserved for Silicon Valley tech guys rushing from one end of the office to the other, electric scooters are suitable for anyone looking to zip across town more efficiently. The answer to eco-friendly journeys when you’d rather avoid public transport and don’t have the time (or inclination) to walk, an electric scooter is emission-free, relatively safe and a far cheaper alternative to an electric car. Because it turns out that “Four legs good, two legs bad” is not only a famous literary quote but also the reaction once you’ve tried out an electric scooter for the first time. Replace those extra two legs with two motor-powered, high-speed wheels and you’ve found yourself the perfect commuting companion or quick-spin-around-the-block assistant. 1	Unagi	Best overall. 2   Apollo  Best high end. 3	Xiaomi	Best value",
+                    MainImg = "post-three.jpg",
+                    CategoryId = 5
+                },
+                new Post
+                {
+                    Title = "The Best Tea Brand In The World: Discover Your Perfect Infusion",
+                    Content = "Remember those days when the welcome offer of a cup of tea was usually followed by ‘milk and sugar?’. Now, even a poorly stocked pantry will have at least a humble selection of herbal and green teas, on top of your run-of-the-mill ‘builder’s’ tea. From traditional Chinese Oolong tea to India’s masala chai to England’s breakfast tea, the diverse people of many nations across the world who otherwise enjoy plenty of distinction, have but one thing in common: they all love a good tea-break. Founded in 2009, Australia’s most awarded organic tea brand has gone from strength to strength, with their passion for glorious tea transmitting into each steaming cup. They’re card-carrying champions of all things sustainable and ethical, with their fine ingredients sourced both from expert growers in their homeland and the rest of the globe at harvest.  Tielka: Best organic tea",
+                    CategoryId = 4,
+                    MainImg = "post-four.jpg"
+                }, 
+                new Post
+                {
+                    Title = "Your Relationship With Your Alarm Clock",
+                    Content = "If you use an alarm clock to wake up in the morning, think about relationship you’d like to create with your alarm clock. What would be the healthiest and happiest version of that relationship for you?" +
+                    "If you were an alarm clock, what kind of relationship would you want to have with your human?" +
+                    "For instance, maybe your alarm clock would appreciate it if you’d pat it on the head now and then and say, “Thanks for waking me up today.I appreciate you!”" +
+                    "How would your alarm clock feel about being put across the room and kept at a distance from you? How would it feel if you groaned when it sounded off?" +
+                    "How would your alarm clock feel if you kept using the snooze feature? Would it potentially lose respect for you?" +
+                    "Have you ever thought about the kind of relationship you’d like to have with your alarm clock ? How would you like to feel towards it, and how would you like to imagine that it feels towards you ?" +
+                    "I normally use an alarm clock to wake up in the morning, set for 5am.I never use the snooze alarm since that wouldn’t help me experience the kind of relationships I want to have – with my alarm clock, with myself, and with the start of my day.",
+                    CategoryId = 5,
+                    MainImg = "post-five.jpg"
+                },
+                new Post
+                {
+                    Title = "Is Manifesting a Physical Skill, a Mental Skill, or a Spiritual Skill?",
+                    Content = "People often frame their manifesting skills as something spiritual, mental, or a combination of the two. Manifesting is often treated as something akin to prayer. Ask the universe for what you desire, and hopefully you’ll receive it. But what if manifesting is actually a physical skill in disguise? Other mental skills, including reading, writing, speaking, and solving math problems, are actually physical skills too. Your physical brain implements these skills on your neural hardware. If your brain is damaged in certain ways, you could lose some of your mental skills. This is one of many factors that’s motivating me to test eating raw for all of 2021. This month I’m reloading those skills, practicing making different raw meals to get back into the flow of eating raw while still permitting cooked food when desired for the next few weeks. I want to do a deeper dive into this aspect of life, especially with respect to what I can glean about reality’s responses. I recently reviewed some of my old blog posts that I wrote during the time when I was eating fully or mostly raw (about 11-12 years ago), and I was struck by how easily I manifested various desires back then.",
+                    CategoryId = 5,
+                    MainImg = "post-six"
+                },
+                new Post
+                {
+                    Title = "Nikola Jokic Just Dominated 1 of the Strongest MVP Fields Ever",
+                    Content = "For months, there seemed to be a cabal of talking heads hellbent on giving the 2021 NBA MVP to anyone but the clearest choice—even though he had distanced himself from the pack since as far back as mid-January. Nikola Jokic, who finished the season with absurd averages of 26.4 points, 10.8 rebounds, 8.3 assists, 1.3 steals and 1.3 threes, was in the conversation for MVP all season. And while there were pushes for Joel Embiid, Stephen Curry, James Harden, Damian Lillard and even Chris Paul, the Denver Nuggets' Serbian point center was officially announced as the MVP on Tuesday. He was well above average in two-point percentage, three-point percentage and free-throw percentage. He trailed only Curry in 'the number of extra points added by True Shot Attempts made above league average.' The NBA is as talent-rich as it's ever been. And Jokic is its Most Valuable Player.",
+                    CategoryId = 2,
+                    MainImg = "post-seven"
+                },
+                new Post
+                {
+                    Title = "Early Free-Agency Prediction for Every NBA Team",
+                    Content = "NBA free agency is always a good time. The buildup to the market's actual opening can be just as enjoyable. It's speculation season when basketball junkies unite in our love of tea-leaf reading, cap-space computing and the glorious game of player-team matchmaking. While many spots on the hoops calendar can make a decent argument for the most wonderful time of the year, this one is pretty great. Atlanta Hawks: Re-Sign John Collins, Boston Celtics: Bring Back Evan Fournier. Brooklyn Nets: Spencer Dinwiddie Exits. Charlotte Hornets: Sign a New Center. Chicago Bulls: Lauri Markkanen Leaves. Cleveland Cavaliers: Keep Jarrett Allen. Dallas Mavericks: Pay Up to Keep Tim Hardaway Jr. Denver Nuggets: Will Barton Opts Out and Returns. Detroit Pistons: Hamidou Diallo Stays, Secures Eight-Figure Salary",
+                    MainImg = "post-eight",
+                    CategoryId = 2,
+                },
+                new Post
+                {
+                    Title = "Is Denver doomed? The surging Suns are exploiting the Nuggets’ backcourt problem",
+                    Content = "",
+                    MainImg = "post-nine.jpg",
+                    CategoryId = 2
+                },
+                new Post
+                {
+                    Title = "",
+                    Content = "",
+                    MainImg = "post-nine.jpg",
+                    CategoryId = 2
+                },
+            };

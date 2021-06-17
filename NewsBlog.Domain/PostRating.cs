@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace NewsBlog.Domain
 {
-    public class PostRating
+    public class PostRating : Entity
     {
-        public int Id { get; set; }
+        public int Rating { get; set; }
+
         public int UserId { get; set; }
 
         public virtual User User { get; set; }
@@ -17,8 +18,5 @@ namespace NewsBlog.Domain
 
         public virtual Post Post { get; set; }
 
-        public int RatingId { get; set; }
-
-        public virtual Rating Rating { get; set; }
     }
 }

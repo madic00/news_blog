@@ -8,9 +8,9 @@ namespace NewsBlog.Domain
 {
     public class Category : Entity
     {
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
 
-        public ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
 
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewsBlog.BusinessLayer.Queries
+namespace NewsBlog.Application.Queries
 {
     public class PageResponse<T> where T : class
     {

@@ -13,9 +13,10 @@ namespace NewsBlog.EfDataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.Property(x => x.CategoryName).HasMaxLength(50);
-            builder.HasIndex(x => x.CategoryName).IsUnique();
-            builder.Property(x => x.CategoryName).IsRequired().HasColumnType("varchar");
+            builder.HasKey(x => x.Id);
+
+            builder.HasIndex(x => x.Name).IsUnique();
+            builder.Property(x => x.Name).IsRequired().HasMaxLength(50).HasColumnType("varchar");
 
             builder.HasMany(p => p.Posts)
                 .WithOne(x => x.Category)

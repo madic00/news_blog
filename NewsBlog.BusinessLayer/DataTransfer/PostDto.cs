@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewsBlog.BusinessLayer.DataTransfer
+namespace NewsBlog.Application.DataTransfer
 {
     public class PostDto : BaseDto
     {
@@ -16,19 +17,34 @@ namespace NewsBlog.BusinessLayer.DataTransfer
 
         public int UserId { get; set; }
 
-        public virtual UserDto User { get; set; }
+        //public UserDto User { get; set; }
 
         public int CategoryId { get; set; }
 
-        //public virtual Category Category { get; set; }
+        public IEnumerable<PostRatingDto> Ratings { get; set; } = new List<PostRatingDto>();
 
-        //public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();
+        public string CategoryName { get; set; }
 
-        //public virtual ICollection<ReadingList> ReadingLists { get; set; } = new HashSet<ReadingList>();
+        public IEnumerable<PostTagDto> PostTags { get; set; } = new List<PostTagDto>();
 
-        //public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
+        public IEnumerable<CommentDto> Comments { get; set; } = new List<CommentDto>();
 
-        //public virtual ICollection<PostRating> Ratings { get; set; } = new HashSet<PostRating>();
+        public double AverageRating => this.Ratings.Any() ? Ratings.Average(x => x.Rating) : 0;
 
+    }
+
+    public class CreatePostDto
+    {
+        public string Title { get; set; }
+
+        public string Content { get; set; }
+
+        public string MainImg { get; set; }
+
+        public IFormFile Image { get; set; }
+
+        public int UserId { get; set; }
+
+        public int CategoryId { get; set; }
     }
 }

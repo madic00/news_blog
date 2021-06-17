@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NewsBlog.BusinessLayer;
+using NewsBlog.Application;
 using NewsBlog.Implementation.Commands;
+using NewsBlog.Implementation.Validators.Posts;
 
-namespace Zadatak2.UserInterface.Core
+namespace NewsBlog.Api.Core
 {
     public static class DIExtensions
     {
@@ -59,7 +60,7 @@ namespace Zadatak2.UserInterface.Core
 
         public static void AddValidators(this IServiceCollection services)
         {
-            var validators = typeof(EfGenericDelete<>).Assembly.GetTypes()
+            var validators = typeof(CreatePostValidator).Assembly.GetTypes()
                .Where(type =>
                    !type.IsAbstract &&
                    type.BaseType.Name == typeof(AbstractValidator<>).Name

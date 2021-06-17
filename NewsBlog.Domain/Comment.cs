@@ -17,5 +17,11 @@ namespace NewsBlog.Domain
         public int UserId { get; set; }
 
         public virtual User User { get; set; }
+
+        public int? ParentId { get; set; }
+
+        public virtual Comment Parent { get; set; }
+
+        public virtual ICollection<Comment> ChildrenComments { get; set; }
     }
 }

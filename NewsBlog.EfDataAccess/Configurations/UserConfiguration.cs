@@ -15,8 +15,11 @@ namespace NewsBlog.EfDataAccess.Configurations
         {
             builder.HasKey(x => x.Id);
             
-            builder.HasAlternateKey(x => x.Email);
             builder.Property(x => x.Email).HasMaxLength(100).HasColumnType("varchar");
+            builder.HasIndex(x => x.Email).IsUnique();
+
+            builder.Property(x => x.Username).HasMaxLength(100).HasColumnType("varchar");
+            builder.HasIndex(x => x.Username).IsUnique();
 
             builder.Property(x => x.FirstName).IsRequired().HasMaxLength(50).HasColumnType("varchar");
             builder.Property(x => x.LastName).IsRequired().HasMaxLength(50).HasColumnType("varchar");
@@ -28,17 +31,17 @@ namespace NewsBlog.EfDataAccess.Configurations
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasMany(u => u.ReadingLists)
-                .WithOne(rl => rl.User)
-                .HasForeignKey(rl => rl.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
             builder.HasMany(u => u.Comments)
                 .WithOne(c => c.User)
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(u => u.Ratings)
+                .WithOne(pr => pr.User)
+                .HasForeignKey(pr => pr.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(u => u.UserUseCases)
                 .WithOne(pr => pr.User)
                 .HasForeignKey(pr => pr.UserId)
                 .OnDelete(DeleteBehavior.Cascade);

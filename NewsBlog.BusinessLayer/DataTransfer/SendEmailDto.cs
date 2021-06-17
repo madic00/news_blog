@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewsBlog.BusinessLayer.DataTransfer
+namespace NewsBlog.Application.DataTransfer
 {
     public class SendEmailDto
     {
@@ -12,6 +12,6 @@ namespace NewsBlog.BusinessLayer.DataTransfer
 
         public string Content { get; set; }
 
-        public string SendTo { get; set; }
+        public string SendFrom { get; set; }
     }
 }

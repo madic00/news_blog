@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace NewsBlog.Domain
 {
-    public class UserUseCase
+    public class UserUseCase : Entity
     {
-        public int Id { get; set; }
-
         public int UserId { get; set; }
 
         public int UseCaseId { get; set; }

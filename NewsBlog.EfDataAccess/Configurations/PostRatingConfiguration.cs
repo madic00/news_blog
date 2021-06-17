@@ -13,10 +13,11 @@ namespace NewsBlog.EfDataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<PostRating> builder)
         {
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.UserId).IsRequired().HasColumnType("int");
             builder.Property(x => x.PostId).IsRequired().HasColumnType("int");
 
-            builder.Property(x => x.RatingId).IsRequired().HasColumnType("int");
         }
     }
 }

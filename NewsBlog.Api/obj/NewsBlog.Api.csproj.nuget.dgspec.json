@@ -28,8 +28,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.BusinessLayer.csproj": {
-                "projectPath": "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.BusinessLayer.csproj"
+              "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.Application.csproj": {
+                "projectPath": "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.Application.csproj"
               },
               "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.EfDataAccess\\NewsBlog.EfDataAccess.csproj": {
                 "projectPath": "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.EfDataAccess\\NewsBlog.EfDataAccess.csproj"
@@ -50,6 +50,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Bogus": {
+              "target": "Package",
+              "version": "[33.0.2, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[5.0.5, )"
@@ -81,12 +85,12 @@
         }
       }
     },
-    "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.BusinessLayer.csproj": {
+    "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.BusinessLayer.csproj",
-        "projectName": "NewsBlog.BusinessLayer",
-        "projectPath": "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.BusinessLayer.csproj",
+        "projectUniqueName": "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.Application.csproj",
+        "projectName": "NewsBlog.Application",
+        "projectPath": "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.Application.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
         "outputPath": "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\obj\\",
         "projectStyle": "PackageReference",
@@ -124,13 +128,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "AutoMapper": {
+            "Doublel.QueryableBuilder": {
               "target": "Package",
-              "version": "[10.1.1, )"
-            },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[8.1.1, )"
+              "version": "[1.2.2, )"
             },
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
@@ -260,23 +260,27 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.5, )"
+              "version": "[5.0.7, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.5, )"
+              "version": "[5.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[5.0.7, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.5, )"
+              "version": "[5.0.7, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.5, )"
+              "version": "[5.0.7, )"
             }
           },
           "imports": [
@@ -322,8 +326,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.BusinessLayer.csproj": {
-                "projectPath": "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.BusinessLayer.csproj"
+              "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.Application.csproj": {
+                "projectPath": "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.BusinessLayer\\NewsBlog.Application.csproj"
               },
               "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.Domain\\NewsBlog.Domain.csproj": {
                 "projectPath": "D:\\projekti\\ASP\\NewsBlog\\NewsBlog.Domain\\NewsBlog.Domain.csproj"
@@ -344,6 +348,22 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            },
+            "Doublel.QueryableBuilder": {
+              "target": "Package",
+              "version": "[1.2.2, )"
+            },
             "FluentValidation": {
               "target": "Package",
               "version": "[10.0.4, )"

@@ -21,12 +21,15 @@ namespace NewsBlog.Api.Core
             _context = context;
         }
 
-        public string MakeToken(string email, string password)
+        public string MakeToken(string username, string password)
         {
-            var user = _context.Users.Include(u => u.UserUseCases)
-                .FirstOrDefault(x => x.Email == email && x.Password == password);
+            var user = _context.Users.FirstOrDefault(x => x.Username == username);
 
-            if (user == null)
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
+
+            var userPass = user.Password;
+
+            if(user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
                 return null;
             }
@@ -37,7 +40,8 @@ namespace NewsBlog.Api.Core
             {
                 Id = user.Id,
                 AllowedUseCases = user.UserUseCases.Select(x => x.UseCaseId),
-                Identity = user.Email
+                Identity = user.Username,
+                IsAdmin = user.IsAdmin
             };
 
             var issuer = "newsblog";
@@ -61,7 +65,7 @@ namespace NewsBlog.Api.Core
                 audience: "Any",
                 claims: claims,
                 notBefore: now,
-                expires: now.AddSeconds(30),
+                expires: now.AddMinutes(30),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

@@ -1,4 +1,4 @@
-﻿using NewsBlog.BusinessLayer;
+﻿using NewsBlog.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,8 @@ namespace NewsBlog.Api.Core
 
         public string Identity => "Unregistred user";
 
-        public IEnumerable<int> AllowedUseCases => new List<int> { 6 };
+        public bool IsAdmin => false;
+
+        public IEnumerable<int> AllowedUseCases => new List<int> { 1, 61, 81 };
     }
 }

@@ -1,4 +1,4 @@
-﻿using NewsBlog.BusinessLayer;
+﻿using NewsBlog.Application;
 using NewsBlog.EfDataAccess;
 using Newtonsoft.Json;
 using System;
@@ -24,7 +24,7 @@ namespace NewsBlog.Implementation.Logging
             {
                 Actor = actor.Identity,
                 Data = JsonConvert.SerializeObject(useCaseData),
-                Date = DateTime.UtcNow,
+                CreatedAt = DateTime.UtcNow,
                 UseCaseName = useCase.Name
             });
 

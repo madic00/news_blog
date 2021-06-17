@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsBlog.Domain", "NewsBlog.Domain\NewsBlog.Domain.csproj", "{3C75D4AF-770B-4229-BB75-CC7D3F0AFD18}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsBlog.BusinessLayer", "NewsBlog.BusinessLayer\NewsBlog.BusinessLayer.csproj", "{94125079-CEA3-4626-AE23-F62C18C00805}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsBlog.Application", "NewsBlog.BusinessLayer\NewsBlog.Application.csproj", "{94125079-CEA3-4626-AE23-F62C18C00805}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsBlog.Implementation", "NewsBlog.Implementation\NewsBlog.Implementation.csproj", "{93A420CD-3AEA-4A1D-9F94-2CE17744AE3F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsBlog.Api", "NewsBlog.Api\NewsBlog.Api.csproj", "{64C051D6-8217-43BA-94B1-F0E9C024E54F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBlog.EfDataAccess", "NewsBlog.EfDataAccess\NewsBlog.EfDataAccess.csproj", "{2FA842C4-EEA1-4D51-85E6-CC2D79D013B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsBlog.EfDataAccess", "NewsBlog.EfDataAccess\NewsBlog.EfDataAccess.csproj", "{2FA842C4-EEA1-4D51-85E6-CC2D79D013B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
