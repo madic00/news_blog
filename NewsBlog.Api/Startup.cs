@@ -119,6 +119,7 @@ namespace NewsBlog.Api
                 cfg.AddProfile(new PostTagProfile());
                 cfg.AddProfile(new UseCaseLogProfile());
                 cfg.AddProfile(new UserUseCaseProfile());
+                cfg.AddProfile(new TagProfile());
             }).CreateMapper());
 
             //services.AddAutoMapper(typeof(PostProfile).Assembly);
