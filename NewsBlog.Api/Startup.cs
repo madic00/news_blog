@@ -114,7 +114,7 @@ namespace NewsBlog.Api
                 cfg.AddProfile(new CommentProfile(provider.GetService<IApplicationActor>()));
                 cfg.AddProfile(new PostRatingProfile(provider.GetService<IApplicationActor>()));
                 cfg.AddProfile(new UserProfile(provider.GetService<IApplicationActor>()));
-                cfg.AddProfile(new PostProfile());
+                cfg.AddProfile(new PostProfile(provider.GetService<IApplicationActor>()));
                 cfg.AddProfile(new CategoryProfile());
                 cfg.AddProfile(new PostTagProfile());
                 cfg.AddProfile(new UseCaseLogProfile());

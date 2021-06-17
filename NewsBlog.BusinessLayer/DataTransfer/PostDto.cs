@@ -46,5 +46,7 @@ namespace NewsBlog.Application.DataTransfer
         public int UserId { get; set; }
 
         public int CategoryId { get; set; }
+
+        public IEnumerable<int> PostTags { get; set; } = new List<int>();
     }
 }

@@ -25,7 +25,18 @@ namespace NewsBlog.Implementation.Validators.Comments
 
             RuleFor(x => x.PostId).NotEmpty().WithMessage("Post is required.")
                 .Must(x => context.Posts.Any(p => p.Id == x))
-                .WithMessage("Provided post doesn't exist.");
+                .WithMessage("Provided post doesn't exist.").DependentRules(() =>
+                {
+                    RuleFor(x => x.PostId).Must((comment, postId) =>
+                    {
+                        if(comment.ParentId != null)
+                        {
+                            return context.Comments.Find(comment.ParentId).PostId == postId;
+                        }
+
+                        return true;
+                    }).WithMessage("Provided combination of parent comment and post doesn't exist");
+                });
 
             //RuleFor(x => x.ParentId)
             //    .Must(x => context.Comments.Any(c => c.Id == x))

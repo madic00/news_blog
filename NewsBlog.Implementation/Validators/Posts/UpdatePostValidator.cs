@@ -23,9 +23,9 @@ namespace NewsBlog.Implementation.Validators.Posts
 
             //RuleFor(x => x.Image).NotEmpty().WithMessage("Post image is required.");
 
-            RuleFor(x => x.UserId).NotEmpty().WithMessage("User is required.")
-                .Must(x => context.Users.Any(u => u.Id == x))
-                .WithMessage("Provided user doesn't exist.");
+            //RuleFor(x => x.UserId).NotEmpty().WithMessage("User is required.")
+            //    .Must(x => context.Users.Any(u => u.Id == x))
+            //    .WithMessage("Provided user doesn't exist.");
 
             RuleFor(x => x.CategoryId).NotEmpty().WithMessage("Category is required.")
                 .Must(x => context.Categories.Any(c => c.Id == x))
