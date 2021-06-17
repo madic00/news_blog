@@ -37,8 +37,8 @@ namespace NewsBlog.Implementation.Commands.Posts
         {
             _validator.ValidateAndThrow(request);
 
-            request.MainImg = _uploadFile.Upload(request.Image);            
-
+            request.MainImg = _uploadFile.Upload(request.Image);     
+            
             var post = _mapper.Map<Domain.Post>(request);
 
             _context.Posts.Add(post);

@@ -48,7 +48,7 @@ namespace NewsBlog.Api.Controllers
 
         // PUT api/<PostsController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromForm] PostDto dto, [FromServices] IUpdatePostCommand command)
+        public IActionResult Put(int id, [FromForm] CreatePostDto dto, [FromServices] IUpdatePostCommand command)
         {
             dto.Id = id;
             _executor.ExecuteCommand(command, dto);

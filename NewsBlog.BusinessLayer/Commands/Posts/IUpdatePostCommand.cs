@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NewsBlog.Application.Commands.Posts
 {
-    public interface IUpdatePostCommand : ICommand<PostDto>
+    public interface IUpdatePostCommand : ICommand<CreatePostDto>
     {
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using NewsBlog.Application.DataTransfer;
 using NewsBlog.EfDataAccess;
+using NewsBlog.Implementation.Validators.Tags;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,23 @@ namespace NewsBlog.Implementation.Validators.Posts
             RuleFor(x => x.CategoryId).NotEmpty().WithMessage("Category is required.")
                 .Must(x => context.Categories.Any(c => c.Id == x))
                 .WithMessage("Provided category doesn't exist.");
+
+            RuleFor(x => x.PostTags).NotEmpty()
+                .DependentRules(() =>
+                {
+                    RuleFor(x => x.PostTags).Must(tags =>
+                    {
+                        var distinctTagIds = tags.Distinct();
+
+                        return distinctTagIds.Count() == tags.Count();
+                    }).WithMessage("There are duplicate tags.").DependentRules(() =>
+                    {
+                        RuleForEach(x => x.PostTags).Must(x =>
+                        {
+                            return context.Tags.Find(x) != null;
+                        }).WithMessage("Provided tag doesnt' exist.");
+                    });
+                });
 
         }
 

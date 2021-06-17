@@ -22,7 +22,11 @@ namespace NewsBlog.Implementation.Profiles
             CreateMap<PostDto, Post>();
 
             CreateMap<CreatePostDto, Post>()
-                .ForMember(x => x.UserId, x => x.MapFrom(y => _actor.Id));
+                .ForMember(x => x.UserId, x => x.MapFrom(y => _actor.Id))
+                .ForMember(x => x.PostTags, x => x.MapFrom(y => y.PostTags.Select(x => new PostTag
+                {
+                    TagId = x
+                })));
 
             CreateMap<Post, CreatePostDto>();
         }
