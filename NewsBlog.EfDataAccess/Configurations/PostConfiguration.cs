@@ -17,7 +17,7 @@ namespace NewsBlog.EfDataAccess.Configurations
 
             builder.Property(x => x.Title).IsRequired().HasMaxLength(100).HasColumnType("varchar");
 
-            builder.Property(x => x.Content).IsRequired().HasColumnType("text");
+            builder.Property(x => x.Content).IsRequired().HasColumnType("varchar(MAX)");
 
             builder.Property(x => x.MainImg).IsRequired().HasColumnType("varchar").HasMaxLength(100);
 
