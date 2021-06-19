@@ -89,19 +89,30 @@ namespace NewsBlog.Api.Controllers
         {
             var posts = new List<Post>();
 
-            for(int i = 20; i <= 40; i++)
+            for(int i = 1; i <= 10; i++)
             {
                 var rnd = new Random();
+
 
                 var post = new Faker<Post>()
                     .RuleFor(x => x.Title, x => x.Lorem.Sentence())
                     .RuleFor(x => x.Content, x => x.Lorem.Paragraphs())
-                    .RuleFor(x => x.MainImg, x => $"post{i}.jpg")
+                    .RuleFor(x => x.MainImg, x => Guid.NewGuid().ToString() + ".jpg")
                     .RuleFor(x => x.CategoryId, x => rnd.Next(1, 5))
-                    .RuleFor(x => x.UserId, x => 9);
+                    .RuleFor(x => x.UserId, x => 8)
+                    .RuleFor(x => x.PostTags, x => new List<PostTag> 
+                    {
+                        new PostTag
+                        {
+                            TagId = rnd.Next(1, 10)
+                        },
+                        new PostTag
+                        {
+                            TagId = rnd.Next(10, 25)
+                        }
+                    });
 
                 posts.Add(post);
-
             }
 
             _context.Posts.AddRange(posts);

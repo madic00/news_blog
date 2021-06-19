@@ -29,7 +29,7 @@ namespace NewsBlog.Api.Core
 
             var userPass = user.Password;
 
-            if(user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
+            if(user == null || user.IsActive == false || !BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
                 return null;
             }
