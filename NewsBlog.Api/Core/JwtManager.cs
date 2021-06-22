@@ -39,7 +39,7 @@ namespace NewsBlog.Api.Core
             var actor = new JwtActor
             {
                 Id = user.Id,
-                AllowedUseCases = user.UserUseCases.Select(x => x.UseCaseId),
+                AllowedUseCases = user.UserUseCases.Where(x => x.IsActive == true).Select(x => x.UseCaseId),
                 Identity = user.Username,
                 IsAdmin = user.IsAdmin
             };
